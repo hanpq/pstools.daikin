@@ -1,5 +1,5 @@
 BeforeAll {
-    . (Resolve-Path -Path "$PSScriptRoot\..\..\Source\private\Get-DaikinControlInfo.ps1")
+    . (Resolve-Path -Path "$PSScriptRoot\..\..\source\private\Get-DaikinControlInfo.ps1")
 }
 
 Describe -Name "Get-DaikinControlInfo.ps1" -Fixture {

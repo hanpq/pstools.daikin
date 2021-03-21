@@ -1,21 +1,21 @@
 BeforeAll {
-    . (Resolve-Path -Path "$PSScriptRoot\..\..\Source\private\Test-DaikinConnectivity.ps1")
+    . (Resolve-Path -Path "$PSScriptRoot\..\..\source\private\Test-DaikinConnectivity.ps1")
 }
 
-Describe -Name "Test-DaikinConnectivity.ps1" -Fixture {
+Describe -Name 'Test-DaikinConnectivity.ps1' -Fixture {
     BeforeAll {
         function Assert-FunctionRequirements {}
-        Mock Assert-FunctionRequirements -MockWith {return $true}
+        Mock Assert-FunctionRequirements -MockWith { return $true }
     }
     Context -Name 'When able to connect to device' {
         BeforeAll {
-            Mock Test-NetConnection -MockWith {return $true}
+            Mock Test-NetConnection -MockWith { return $true }
         }
         It -Name 'Should not throw' {
-            {Test-DaikinConnectivity -Hostname 'daikin.network.com'} | should -not -throw
+            { Test-DaikinConnectivity -Hostname 'daikin.network.com' } | Should -Not -Throw
         }
         It -Name 'Return true' {
-            Test-DaikinConnectivity -Hostname 'daikin.network.com' | should -BeTrue
+            Test-DaikinConnectivity -Hostname 'daikin.network.com' | Should -BeTrue
         }
     }
     Context -Name 'When unable to connect to device' {
@@ -23,10 +23,10 @@ Describe -Name "Test-DaikinConnectivity.ps1" -Fixture {
             Mock Test-NetConnection -MockWith { return $false }
         }
         It -Name 'Should not throw' {
-            { Test-DaikinConnectivity -Hostname 'daikin.network.com' } | should -not -throw
+            { Test-DaikinConnectivity -Hostname 'daikin.network.com' } | Should -Not -Throw
         }
         It -Name 'Return false' {
-            Test-DaikinConnectivity -Hostname 'daikin.network.com' | should -befalse
+            Test-DaikinConnectivity -Hostname 'daikin.network.com' | Should -BeFalse
         }
     }
     Context -Name 'When Test-NetConnection throws' {
@@ -34,7 +34,7 @@ Describe -Name "Test-DaikinConnectivity.ps1" -Fixture {
             Mock Test-NetConnection -MockWith { throw }
         }
         It -Name 'Should not throw' {
-            { Test-DaikinConnectivity -Hostname 'daikin.network.com' } | should -throw
+            { Test-DaikinConnectivity -Hostname 'daikin.network.com' } | Should -Throw
         }
     }
 }

@@ -1,5 +1,5 @@
 BeforeAll {
-    . (Resolve-Path -Path "$PSScriptRoot\..\..\Source\private\Convert-DaikinResponse.ps1")
+    . (Resolve-Path -Path "$PSScriptRoot\..\..\source\private\Convert-DaikinResponse.ps1")
 }
 
 Describe -Name "Convert-DaikinResponse.ps1" -Fixture {

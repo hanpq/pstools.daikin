@@ -1,5 +1,5 @@
 BeforeAll {
-    . (Resolve-Path -Path "$PSScriptRoot\..\..\Source\private\Resolve-DaikinHostname.ps1")
+    . (Resolve-Path -Path "$PSScriptRoot\..\..\source\private\Resolve-DaikinHostname.ps1")
 }
 
 Describe -Name "Resolve-DaikinHostname.ps1" -Fixture {
