@@ -8,7 +8,8 @@
     .COMPANYNAME Personal
     .COPYRIGHT (c) 2020, , All Rights Reserved
 #>
-function Set-DaikinAirCon {
+function Set-DaikinAirCon
+{
     <#
     .DESCRIPTION
         Cmdlet allows to configure the aircon device to the desired setting.
@@ -50,7 +51,8 @@ function Set-DaikinAirCon {
         [ValidateSet('Stopped', 'VerticalSwing', 'HorizontalSwing', 'BothSwing')]$FanDirection
     )
 
-    BEGIN {
+    BEGIN
+    {
         $ModeTranslation = @{
             'AUTO' = '1'
             'DRY'  = '2'
@@ -86,10 +88,13 @@ function Set-DaikinAirCon {
         }
     }
 
-    PROCESS {
-        foreach ($Key in $PSBoundParameters.Keys) {
+    PROCESS
+    {
+        foreach ($Key in $PSBoundParameters.Keys)
+        {
             if ($Key -eq 'HostName') { continue }
-            switch ($Key) {
+            switch ($Key)
+            {
                 'Temp' { $NewSettings.stemp = $PSBoundParameters.$Key }
                 'PowerOn' { $NewSettings.pow = $PSBoundParameters.$Key }
                 'Mode' { $NewSettings.mode = $ModeTranslation.($PSBoundParameters.$Key) }
@@ -97,17 +102,21 @@ function Set-DaikinAirCon {
                 'FanDirection' { $NewSetting.f_dir = $FanDirectionTranslation.($PSBoundParameters.$Key) }
             }
         }
-        if ($NewSettings.stemp -eq '--') {
+        if ($NewSettings.stemp -eq '--')
+        {
             $NewSettings.stemp = $CurrentSettings.('dt{0}' -f $NewSettings.Mode)
         }
-        if ($NewSettings.shum -eq '--') {
+        if ($NewSettings.shum -eq '--')
+        {
             $NewSettings.shum = $CurrentSettings.('dh{0}' -f $NewSettings.Mode)
         }
     }
 
-    END {
+    END
+    {
         $String = @()
-        foreach ($Key in $NewSettings.Keys) {
+        foreach ($Key in $NewSettings.Keys)
+        {
             $String += ('{0}={1}' -f $Key, $NewSettings.$Key)
         } 
         $PropertyString = $String -join '&'
@@ -116,7 +125,8 @@ function Set-DaikinAirCon {
         $Result = Invoke-RestMethod -Uri $uri -Method post
         $Result = Convert-DaikinResponse -String $Result
 
-        switch ($Result.ret) {
+        switch ($Result.ret)
+        {
             'OK' { Write-Success -Message 'Successfully sent command to AirCon' -Target $Hostname }
             'PARAM NG' { Write-Error -Message ('Command failed: [PARAM NG]') -TargetObject $Hostname }
             default { Write-Warning -Message ('Unknown message returned: {0}' -f $PSItem) -Target $HostName }

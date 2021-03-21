@@ -8,7 +8,8 @@
     .COMPANYNAME Personal
     .COPYRIGHT (c) 2020, Hannes Palmquist, All Rights Reserved
 #>
-function Test-DaikinConnectivity {
+function Test-DaikinConnectivity
+{
     <#
     .DESCRIPTION
         Function tests connection to specified target
@@ -24,22 +25,27 @@ function Test-DaikinConnectivity {
         [Parameter(Mandatory)]$Hostname
     )
 
-    BEGIN {
-        if (-not (Assert-FunctionRequirements -InstalledModules 'NetTCPIP')) { break }
-    }
-
-    PROCESS {
+    PROCESS
+    {
         $SavedProgressPreference = $global:ProgressPreference
         $global:ProgressPreference = 'SilentlyContinue'
-        try {
-            if (Test-NetConnection -ComputerName $Hostname -InformationLevel Quiet -WarningAction SilentlyContinue) {
+        try
+        {
+            if (Test-Connection -ComputerName $Hostname -Quiet -WarningAction SilentlyContinue)
+            {
                 return $true
-            } else {
+            }
+            else
+            {
                 return $false
             }
-        } catch {
+        }
+        catch
+        {
             throw 'Failed to check status of daikin device'
-        } finally {
+        }
+        finally
+        {
             $global:ProgressPreference = $SavedProgressPreference
         }
     }

@@ -32,7 +32,7 @@ function Resolve-DaikinHostname
         {
             if (Test-DaikinConnectivity -HostName:$Hostname)
             {
-                return Test-NetConnection -ComputerName $Hostname -WarningAction SilentlyContinue | Select-Object -expand remoteaddress
+                return Test-Connection -ComputerName $Hostname -WarningAction SilentlyContinue | Select-Object -expand IPV4Address | Select-Object -expand IPAddressToString
             }
             else
             {

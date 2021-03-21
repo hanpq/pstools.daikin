@@ -4,12 +4,10 @@ BeforeAll {
 
 Describe -Name 'Test-DaikinConnectivity.ps1' -Fixture {
     BeforeAll {
-        function Assert-FunctionRequirements {}
-        Mock Assert-FunctionRequirements -MockWith { return $true }
     }
     Context -Name 'When able to connect to device' {
         BeforeAll {
-            Mock Test-NetConnection -MockWith { return $true }
+            Mock Test-Connection -MockWith { return $true }
         }
         It -Name 'Should not throw' {
             { Test-DaikinConnectivity -Hostname 'daikin.network.com' } | Should -Not -Throw
@@ -20,7 +18,7 @@ Describe -Name 'Test-DaikinConnectivity.ps1' -Fixture {
     }
     Context -Name 'When unable to connect to device' {
         BeforeAll {
-            Mock Test-NetConnection -MockWith { return $false }
+            Mock Test-Connection -MockWith { return $false }
         }
         It -Name 'Should not throw' {
             { Test-DaikinConnectivity -Hostname 'daikin.network.com' } | Should -Not -Throw
@@ -31,7 +29,7 @@ Describe -Name 'Test-DaikinConnectivity.ps1' -Fixture {
     }
     Context -Name 'When Test-NetConnection throws' {
         BeforeAll {
-            Mock Test-NetConnection -MockWith { throw }
+            Mock Test-Connection -MockWith { throw }
         }
         It -Name 'Should not throw' {
             { Test-DaikinConnectivity -Hostname 'daikin.network.com' } | Should -Throw
