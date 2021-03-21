@@ -8,7 +8,8 @@
     .COMPANYNAME Personal
     .COPYRIGHT (c) 2020, Hannes Palmquist, All Rights Reserved
 #>
-function Resolve-DaikinHostname {
+function Resolve-DaikinHostname
+{
     <#
     .DESCRIPTION
         Resolves the IP address if hostname is specified as FQDN/Hostname
@@ -23,19 +24,27 @@ function Resolve-DaikinHostname {
     param(
         [Parameter(Mandatory)]$Hostname
     )
-    PROCESS {
-        if (-not (Assert-FunctionRequirements -InstalledModules 'NetTCPIP')) { break }
+    PROCESS
+    {
         $SavedProgressPreference = $global:progresspreference
         $Global:ProgressPreference = 'SilentlyContinue'
-        try {
-            if (Test-DaikinConnectivity -HostName:$Hostname) {
-                return Test-NetConnection -ComputerName $Hostname -WarningAction SilentlyContinue | select-object -expand remoteaddress
-            } else {
-                throw "Device does not respond"
+        try
+        {
+            if (Test-DaikinConnectivity -HostName:$Hostname)
+            {
+                return Test-NetConnection -ComputerName $Hostname -WarningAction SilentlyContinue | Select-Object -expand remoteaddress
             }
-        } catch {
+            else
+            {
+                throw 'Device does not respond'
+            }
+        }
+        catch
+        {
             throw 'Failed to resolve IP address of hostname'
-        } finally {
+        }
+        finally
+        {
             $global:ProgressPreference = $SavedProgressPreference
         }
     }
