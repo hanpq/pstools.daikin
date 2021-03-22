@@ -1,15 +1,14 @@
 {
-  "Versions": [
-     {
-        "Version": "1.0.0",
-        "Date": "",
-        "Items":[
-           {
-              "Type": "other",
-              "Message": "First version",
-           },
-        ]
-     },
-  ]
+    "Versions": [
+        {
+            "Version": "1.0.0",
+            "Date": "",
+            "Items": [
+                {
+                    "Type": "other",
+                    "Message": "First version"
+                }
+            ]
+        }
+    ]
 }
-
