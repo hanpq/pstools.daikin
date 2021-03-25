@@ -8,7 +8,8 @@
     .COMPANYNAME Personal
     .COPYRIGHT (c) 2020, Hannes Palmquist, All Rights Reserved
 #>
-function Get-DaikinStatus {
+function Get-DaikinStatus
+{
     <#
     .DESCRIPTION
         Retreives the current configuration of the Daikin AirCon device
@@ -28,19 +29,21 @@ function Get-DaikinStatus {
         $HostName
     )
 
-    BEGIN {
+    BEGIN
+    {
         $Hostname = Resolve-DaikinHostname -Hostname:$Hostname
         $ControlInfo = Get-DaikinControlInfo -Hostname:$HostName
-        Write-Verbose -Message 'Collected ControlInfo via REST API' -target $hostname
+        Write-Verbose -Message 'Collected ControlInfo via REST API'
         # $ModelInfo = Get-DaikinModelInfo -Hostname:$HostName
-        # Write-Verbose -Message 'Collected ModelInfo via REST API' -target $hostname
+        # Write-Verbose -Message 'Collected ModelInfo via REST API'
         $BasicInfo = Get-DaikinBasicInfo -Hostname:$HostName
-        Write-Verbose -Message 'Collected BasicInfo via REST API' -target $hostname
+        Write-Verbose -Message 'Collected BasicInfo via REST API'
         $SensorInfo = Get-DaikinSensorInfo -HostName:$HostName
-        Write-Verbose -Message 'Collected SensorInfo via REST API' -target $hostname
+        Write-Verbose -Message 'Collected SensorInfo via REST API'
     }
 
-    PROCESS {
+    PROCESS
+    {
         $ObjectHash = [ordered]@{
             'PowerOn'        = $ControlInfo.PowerOn
             'Mode'           = $ControlInfo.Mode

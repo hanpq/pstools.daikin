@@ -8,7 +8,8 @@
     .COMPANYNAME Personal
     .COPYRIGHT (c) 2020, Hannes Palmquist, All Rights Reserved
 #>
-function Get-DaikinPollingConfiguration {
+function Get-DaikinPollingConfiguration
+{
     <#
     .DESCRIPTION
         asd
@@ -21,12 +22,30 @@ function Get-DaikinPollingConfiguration {
 
     [CmdletBinding()] # Enabled advanced function support
     param(
-        $Hostname
+        $Hostname,
+        $Raw
     )
-    PROCESS {
-        $Result = Invoke-RestMethod -Uri ('http://{0}//common/get_remote_method' -f $Hostname) -Method GET
-        $Result = Convert-DaikinResponse -String $Result
-        $Result
+    PROCESS
+    {
+        try
+        {
+            $Result = Invoke-RestMethod -Uri ('http://{0}//common/get_remote_method' -f $Hostname) -Method GET -ErrorAction Stop
+        }
+        catch
+        {
+            throw $_.exception.message
+        }
+
+        try
+        {
+            $Result = Convert-DaikinResponse -String $Result -Raw:$Raw -ErrorAction Stop
+        }
+        catch
+        {
+            throw $_.exception.message
+        }
+        
+        return $Result
     }
 }
 #endregion

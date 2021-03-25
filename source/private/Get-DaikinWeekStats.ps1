@@ -8,7 +8,8 @@
     .COMPANYNAME Personal
     .COPYRIGHT (c) 2020, , All Rights Reserved
 #>
-function Get-DaikinWeekStats {
+function Get-DaikinWeekStats
+{
     <#
     .DESCRIPTION
         asd
@@ -21,12 +22,31 @@ function Get-DaikinWeekStats {
 
     [CmdletBinding()] # Enabled advanced function support
     param(
-        $Hostname
+        $Hostname,
+        $Raw
     )
-    PROCESS {
-        $Result = Invoke-RestMethod -Uri ('http://{0}/aircon/get_week_power' -f $Hostname) -Method GET
-        $Result = Convert-DaikinResponse -String $Result
-        $Result
+
+    PROCESS
+    {
+        try
+        {
+            $Result = Invoke-RestMethod -Uri ('http://{0}/aircon/get_week_power' -f $Hostname) -Method GET -ErrorAction Stop
+        }
+        catch
+        {
+            throw $_.exception.message
+        }
+
+        try
+        {
+            $Result = Convert-DaikinResponse -String $Result -Raw:$Raw -ErrorAction Stop
+        }
+        catch
+        {
+            throw $_.exception.message
+        }
+        
+        return $Result
     }
 }
 #endregion
