@@ -1,6 +1,7 @@
-﻿@{
+﻿
+@{
   RootModule = 'pstools.daikin.psm1'
-  ModuleVersion = '1.2'
+  ModuleVersion = '1.2.1'
   CompatiblePSEditions = @('Desktop','Core')
   GUID = '5588fcbe-895e-4578-b1c3-9948bc62c746'
   Author = 'Hannes Palmquist'
@@ -13,7 +14,7 @@
   PrivateData = @{
     ModuleName = 'pstools.daikin'
     DateCreated = '2020-10-03'
-    LastBuildDate = '2021-03-23'
+    LastBuildDate = '2021-03-25'
     PSData = @{
       Tags = @('PSEdition_Desktop','PSEdition_Core','Windows')
       ProjectUri = 'https://getps.dev/modules/pstools.daikin/quickstart'
