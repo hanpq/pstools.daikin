@@ -9,10 +9,10 @@ Describe -Name 'Get-DaikinBasicInfo.ps1' -Fixture {
         BeforeAll {
             Mock Invoke-RestMethod -MockWith {}
             function Convert-DaikinResponse {}
-            Mock Convert-DaikinResponse -MockWith {return [ordered]@{}}
+            Mock Convert-DaikinResponse -MockWith { return [ordered]@{} }
         }
         It -Name 'Should not throw' {
-            { Get-DaikinBasicInfo -Hostname "daikin.network.com" } | should -not -throw
+            { Get-DaikinBasicInfo -Hostname 'daikin.network.com' } | Should -Not -Throw
         }
     }
     Context -Name 'When Invoke-RestMethod fails' {
@@ -20,7 +20,7 @@ Describe -Name 'Get-DaikinBasicInfo.ps1' -Fixture {
             Mock Invoke-RestMethod -MockWith { throw }
         }
         It -Name 'Should throw' {
-            { Get-DaikinBasicInfo -Hostname 'daikin.network.com' } | Should -throw
+            { Get-DaikinBasicInfo -Hostname 'daikin.network.com' } | Should -Throw
         }
     }
     Context -Name 'When Convert-DaikinResponse fails' {
@@ -29,7 +29,7 @@ Describe -Name 'Get-DaikinBasicInfo.ps1' -Fixture {
             Mock Convert-DaikinResponse -MockWith { throw }
         }
         It -Name 'Should throw' {
-            { Get-DaikinBasicInfo -Hostname 'daikin.network.com' } | Should -throw
+            { Get-DaikinBasicInfo -Hostname 'daikin.network.com' } | Should -Throw
         }
     }
 }
