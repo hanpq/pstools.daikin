@@ -25,6 +25,7 @@ Describe -Name 'Get-DaikinSensorInfo.ps1' -Fixture {
     }
     Context -Name 'When Convert-DaikinResponse fails' {
         BeforeAll {
+            Mock Invoke-RestMethod -MockWith {}
             function Convert-DaikinResponse {}
             Mock Convert-DaikinResponse -MockWith { throw }
         }
