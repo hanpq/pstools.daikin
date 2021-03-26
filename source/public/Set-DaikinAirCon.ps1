@@ -92,14 +92,32 @@ function Set-DaikinAirCon
     {
         foreach ($Key in $PSBoundParameters.Keys)
         {
-            if ($Key -eq 'HostName') { continue }
+            if ($Key -eq 'HostName') 
+            {
+                continue 
+            }
             switch ($Key)
             {
-                'Temp' { $NewSettings.stemp = $PSBoundParameters.$Key }
-                'PowerOn' { $NewSettings.pow = $PSBoundParameters.$Key }
-                'Mode' { $NewSettings.mode = $ModeTranslation.($PSBoundParameters.$Key) }
-                'FanSpeed' { $NewSetting.f_rate = $FanSpeedTranslation.($PSBoundParameters.$Key) }
-                'FanDirection' { $NewSetting.f_dir = $FanDirectionTranslation.($PSBoundParameters.$Key) }
+                'Temp'
+                { 
+                    $NewSettings.stemp = $PSBoundParameters.$Key 
+                }
+                'PowerOn'
+                { 
+                    $NewSettings.pow = $PSBoundParameters.$Key 
+                }
+                'Mode'
+                { 
+                    $NewSettings.mode = $ModeTranslation.($PSBoundParameters.$Key) 
+                }
+                'FanSpeed'
+                { 
+                    $NewSettings.f_rate = $FanSpeedTranslation.($PSBoundParameters.$Key) 
+                }
+                'FanDirection'
+                { 
+                    $NewSettings.f_dir = $FanDirectionTranslation.($PSBoundParameters.$Key) 
+                }
             }
         }
         if ($NewSettings.stemp -eq '--')
@@ -131,13 +149,9 @@ function Set-DaikinAirCon
             { 
                 Write-Host -Object 'Success' -ForegroundColor Green
             }
-            'PARAM NG'
-            { 
-                Write-Error -Message ('Command failed: [PARAM NG]')
-            }
             default
             { 
-                Write-Warning -Message ('Unknown message returned: {0}' -f $PSItem)
+                Write-Error -Message ('Unknown message returned: {0}' -f $PSItem) -ErrorAction Stop
             }
         } 
     }
