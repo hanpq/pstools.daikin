@@ -127,9 +127,18 @@ function Set-DaikinAirCon
 
         switch ($Result.ret)
         {
-            'OK' { Write-Success -Message 'Successfully sent command to AirCon' -Target $Hostname }
-            'PARAM NG' { Write-Error -Message ('Command failed: [PARAM NG]') -TargetObject $Hostname }
-            default { Write-Warning -Message ('Unknown message returned: {0}' -f $PSItem) -Target $HostName }
+            'OK'
+            { 
+                Write-Host -Object 'Success' -ForegroundColor Green
+            }
+            'PARAM NG'
+            { 
+                Write-Error -Message ('Command failed: [PARAM NG]')
+            }
+            default
+            { 
+                Write-Warning -Message ('Unknown message returned: {0}' -f $PSItem)
+            }
         } 
     }
 
