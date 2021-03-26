@@ -471,8 +471,8 @@ Task -name 'Release' -depend @(
 Task -name default -depends 'Build'
 
 Task -name 'TagAndRelease' -precondition { $buildconfig.Github } -action {
-    git -C $path_root -a ('v{0}' -f $import_modulemanifest.version) -m ('Version {0} released' -f $import_modulemanifest.version)
-    git -C $path_root push origin ('v{0}' -f $import_modulemanifest.version)
+    git -C $path_root -a ('v{0}' -f $import_modulemanifest.moduleversion) -m ('Version {0} released' -f $import_modulemanifest.moduleversion)
+    git -C $path_root push origin ('v{0}' -f $import_modulemanifest.moduleversion)
 }
 
 Task -name 'CommitAndPushRepository' -precondition { $buildconfig.Github } -action {
@@ -838,7 +838,7 @@ Task -name 'UpdateFileList' -action {
             Push-Location -Path $path_root_source
             $AllSourceFiles = Get-ChildItem -Path $path_root_source -Exclude 'logs', 'output', 'temp' | Get-ChildItem -File -Recurse
             $AllSourceFiles | ForEach-Object {
-                $PSItem | Add-Member -MemberType NoteProperty -Name RelativePath -Value (
+                $PSItem | Add-Member -MemberType NoteProperty -name RelativePath -Value (
                     Resolve-Path -Path $PSItem.FullName -Relative
                 )
             }
@@ -924,10 +924,10 @@ Task -name 'CreateModuleHelpFiles' -action {
     try
     {
         $Measure = Measure-Command -Expression {
-            Import-Module -Name $path_modulemanifest -Scope Global -ErrorAction Stop
+            Import-Module -name $path_modulemanifest -Scope Global -ErrorAction Stop
             $null = New-MarkdownHelp -Module $modulename -OutputFolder (Join-Path -Path $path_root_source -ChildPath '\en-US') -Force -ErrorAction Stop
             $null = New-ExternalHelp -Path (Join-Path -Path $path_root_source -ChildPath '\en-US') -OutputPath (Join-Path -Path $path_root_source -ChildPath '\en-US') -Force -ErrorAction Stop
-            Remove-Module -Name $modulename -Force -ErrorAction Stop
+            Remove-Module -name $modulename -Force -ErrorAction Stop
         }
     }
     catch
@@ -993,7 +993,7 @@ Task -name 'ExportSign' -precondition { $buildconfig.Sign } -action {
         {
             try
             {
-                $Cert = New-CodeSigningCert -name 'HannesPalmquist' -FriendlyName 'HannesPalmquist' -ErrorAction Stop
+                $Cert = New-CodeSigningCert -Name 'HannesPalmquist' -FriendlyName 'HannesPalmquist' -ErrorAction Stop
                 Write-CheckListItem -Message 'Successfully created Code Signing Certificate' -Severity Positive
             }
             catch
@@ -1007,7 +1007,7 @@ Task -name 'ExportSign' -precondition { $buildconfig.Sign } -action {
             Remove-Item -Path ('Cert:\CurrentUser\My\{0}' -f $Cert.Thumbprint) -Force
             try
             {
-                $Cert = New-CodeSigningCert -name 'HannesPalmquist' -FriendlyName 'HannesPalmquist' -ErrorAction Stop
+                $Cert = New-CodeSigningCert -Name 'HannesPalmquist' -FriendlyName 'HannesPalmquist' -ErrorAction Stop
                 Write-CheckListItem -Message 'Successfully renewed Code Signing Certificate' -Severity Positive
             }
             catch
