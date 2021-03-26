@@ -471,7 +471,7 @@ Task -name 'Release' -depend @(
 Task -name default -depends 'Build'
 
 Task -name 'TagAndRelease' -precondition { $buildconfig.Github } -action {
-    git -C $path_root -a ('v{0}' -f $import_modulemanifest.moduleversion) -m ('Version {0} released' -f $import_modulemanifest.moduleversion)
+    git -C $path_root tag -a ('v{0}' -f $import_modulemanifest.moduleversion) -m ('Version {0} released' -f $import_modulemanifest.moduleversion)
     git -C $path_root push origin ('v{0}' -f $import_modulemanifest.moduleversion)
 }
 
