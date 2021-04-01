@@ -32,13 +32,20 @@ function Resolve-DaikinHostname
         {
             if (Test-DaikinConnectivity -HostName:$Hostname)
             {
-                if ($PSVersionTable.PSEdition -eq 'core') 
+                if ($Hostname -match '(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')
                 {
-                    return Test-Connection -ComputerName $Hostname -WarningAction SilentlyContinue | Select-Object -expand address | Select-Object -expand IPAddressToString
-                } 
+                    return $hostname
+                }
                 else 
                 {
-                    return Test-Connection -ComputerName $Hostname -WarningAction SilentlyContinue | Select-Object -expand ipv4address | Select-Object -expand IPAddressToString
+                    try 
+                    {
+                        return Resolve-DnsName $hostname -Type A -ErrorAction Stop | Where-Object querytype -EQ 'A' -ErrorAction Stop | Select-Object -ExpandProperty ipaddress -ErrorAction Stop
+                    }
+                    catch
+                    {
+                        throw "Failed to resolve hostname $hostname to IP address with error: $PSItem"
+                    }
                 }
             }
             else
