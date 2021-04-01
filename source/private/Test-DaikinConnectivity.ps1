@@ -42,7 +42,7 @@ function Test-DaikinConnectivity
         }
         catch
         {
-            throw 'Failed to check status of daikin device'
+            throw "Failed to check status of daikin device with error: $PSItem"
         }
         finally
         {
