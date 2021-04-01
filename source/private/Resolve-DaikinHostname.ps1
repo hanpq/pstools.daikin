@@ -32,7 +32,14 @@ function Resolve-DaikinHostname
         {
             if (Test-DaikinConnectivity -HostName:$Hostname)
             {
-                return Test-Connection -ComputerName $Hostname -WarningAction SilentlyContinue | Select-Object -expand IPV4Address | Select-Object -expand IPAddressToString
+                if ($PSVersionTable.PSEdition -eq 'core') 
+                {
+                    return Test-Connection -ComputerName $Hostname -WarningAction SilentlyContinue | Select-Object -expand address | Select-Object -expand IPAddressToString
+                } 
+                else 
+                {
+                    return Test-Connection -ComputerName $Hostname -WarningAction SilentlyContinue | Select-Object -expand ipv4address | Select-Object -expand IPAddressToString
+                }
             }
             else
             {
@@ -41,7 +48,7 @@ function Resolve-DaikinHostname
         }
         catch
         {
-            throw 'Failed to resolve IP address of hostname'
+            throw "Failed to resolve IP address of hostname with error: $PSItem"
         }
         finally
         {
