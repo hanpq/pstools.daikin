@@ -24,6 +24,31 @@ function Resolve-DaikinHostname
     param(
         [Parameter(Mandatory)]$Hostname
     )
+    BEGIN
+    {
+        function internal_resolvednsname 
+        {
+            param
+            (
+                $hostname
+            )
+            <#
+                Test-Connection is disqualified because the returned property name for the 
+                IP address in Test-Connection are different depending on Powershell edition. Which meant 
+                that the function had to check for edition before retreiving the value. And in turn would 
+                never fulfill complete code coverage tests.
+
+                Resolve-DNSName is disqualified because it is not available on Linux and MacOS.
+
+                Resorted to .NET class System.Net.Dns and the method GetHostEntry which works on all editions and platforms.
+
+                The operation is separated in a internal function to allow unit test mocks
+
+            #>
+            return [System.Net.Dns]::GetHostEntry($hostname).AddressList[0].IPAddressToString
+        }
+    }
+
     PROCESS
     {
         $SavedProgressPreference = $global:progresspreference
@@ -40,7 +65,7 @@ function Resolve-DaikinHostname
                 {
                     try 
                     {
-                        return Resolve-DnsName $hostname -Type A -ErrorAction Stop | Where-Object querytype -EQ 'A' -ErrorAction Stop | Select-Object -ExpandProperty ipaddress -ErrorAction Stop
+                        return (internal_resolvednsname -hostname $hostname)
                     }
                     catch
                     {
