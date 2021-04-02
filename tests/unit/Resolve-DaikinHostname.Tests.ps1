@@ -33,6 +33,17 @@ Describe -Name 'Resolve-DaikinHostname.ps1' -Fixture {
             Resolve-DaikinHostname -HostName 'daikin.network.com' | Should -Be '192.168.1.1'
         }
     }
+    Context -Name 'When calling with a valid FQDN but IP resolution fails' {
+        BeforeAll {
+            function Test-DaikinConnectivity {}
+            Mock Test-DaikinConnectivity -MockWith { return $true }
+            function internal_resolvednsname {}
+            Mock internal_resolvednsname -MockWith { throw }
+        }
+        It -Name 'It should throw' -Test {
+            { Resolve-DaikinHostname -Hostname 'daikin.network.com' } | Should -Throw
+        }
+    }
     Context -Name 'When calling with a valid FQDN that does not respond' {
         BeforeAll {
             function Test-DaikinConnectivity {}
