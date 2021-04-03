@@ -1,12 +1,16 @@
 ﻿<#PSScriptInfo
-    .VERSION 1.0.0.0
-    .GUID 5588fcbe-895e-4578-b1c3-9948bc62c746
-    .FILENAME Get-DaikinBasicInfo.ps1
-    .AUTHOR Hannes Palmquist
-    .CREATEDDATE 2020-10-03
-    .COMPANYNAME 
-    .COPYRIGHT (c) 2020, Hannes Palmquist, All Rights Reserved
-#>
+{
+    "VERSION":  "1.0.0.0",
+    "GUID":  "5588fcbe-895e-4578-b1c3-9948bc62c746",
+    "FILENAME":  "Get-DaikinBasicInfo.ps1",
+    "AUTHOR":  "Hannes Palmquist",
+    "CREATEDDATE":  "2020-10-03",
+    "COMPANYNAME":  [
+
+                    ],
+    "COPYRIGHT":  "(c) 2020, Hannes Palmquist, All Rights Reserved"
+}
+PSScriptInfo#>
 function Get-DaikinBasicInfo {
     <#
     .DESCRIPTION

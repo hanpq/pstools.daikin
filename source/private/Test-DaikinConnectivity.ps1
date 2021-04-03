@@ -1,13 +1,15 @@
 ﻿<#PSScriptInfo
-    .VERSION 1.0.0.0
-    .GUID 1af893cc-b4cb-4c01-869e-d5b1b004ffb3
-    .FILENAME Test-DaikinConnectivity.ps1
-    .AUTHOR Hannes Palmquist
-    .AUTHOREMAIL hannes.palmquist@outlook.com
-    .CREATEDDATE 2020-10-04
-    .COMPANYNAME Personal
-    .COPYRIGHT (c) 2020, Hannes Palmquist, All Rights Reserved
-#>
+{
+    "VERSION":  "1.0.0.0",
+    "GUID":  "1af893cc-b4cb-4c01-869e-d5b1b004ffb3",
+    "FILENAME":  "Test-DaikinConnectivity.ps1",
+    "AUTHOR":  "Hannes Palmquist",
+    "AUTHOREMAIL":  "hannes.palmquist@outlook.com",
+    "CREATEDDATE":  "2020-10-04",
+    "COMPANYNAME":  "Personal",
+    "COPYRIGHT":  "(c) 2020, Hannes Palmquist, All Rights Reserved"
+}
+PSScriptInfo#>
 function Test-DaikinConnectivity
 {
     <#

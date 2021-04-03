@@ -1,13 +1,15 @@
 ﻿<#PSScriptInfo
-    .VERSION 1.0.0.0
-    .GUID 95448aa4-5d64-4d68-a34f-4b699887dac2
-    .FILENAME Get-DaikinPollingConfiguration.ps1
-    .AUTHOR Hannes Palmquist
-    .AUTHOREMAIL hannes.palmquist@outlook.com
-    .CREATEDDATE 2020-10-03
-    .COMPANYNAME Personal
-    .COPYRIGHT (c) 2020, Hannes Palmquist, All Rights Reserved
-#>
+{
+    "VERSION":  "1.0.0.0",
+    "GUID":  "95448aa4-5d64-4d68-a34f-4b699887dac2",
+    "FILENAME":  "Get-DaikinPollingConfiguration.ps1",
+    "AUTHOR":  "Hannes Palmquist",
+    "AUTHOREMAIL":  "hannes.palmquist@outlook.com",
+    "CREATEDDATE":  "2020-10-03",
+    "COMPANYNAME":  "Personal",
+    "COPYRIGHT":  "(c) 2020, Hannes Palmquist, All Rights Reserved"
+}
+PSScriptInfo#>
 function Get-DaikinPollingConfiguration
 {
     <#

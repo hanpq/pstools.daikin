@@ -1,13 +1,15 @@
 ﻿<#PSScriptInfo
-    .VERSION 1.0.0.0
-    .GUID 3de2031d-875b-45d9-9463-6893a23d3345
-    .FILENAME Get-DaikinWeekStats.ps1
-    .AUTHOR Hannes Palmquist
-    .AUTHOREMAIL hannes.palmquist@outlook.com
-    .CREATEDDATE 2020-10-03
-    .COMPANYNAME Personal
-    .COPYRIGHT (c) 2020, , All Rights Reserved
-#>
+{
+    "VERSION":  "1.0.0.0",
+    "GUID":  "3de2031d-875b-45d9-9463-6893a23d3345",
+    "FILENAME":  "Get-DaikinWeekStats.ps1",
+    "AUTHOR":  "Hannes Palmquist",
+    "AUTHOREMAIL":  "hannes.palmquist@outlook.com",
+    "CREATEDDATE":  "2020-10-03",
+    "COMPANYNAME":  "Personal",
+    "COPYRIGHT":  "(c) 2020, , All Rights Reserved"
+}
+PSScriptInfo#>
 function Get-DaikinWeekStats
 {
     <#

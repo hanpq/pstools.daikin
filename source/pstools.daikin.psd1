@@ -1,7 +1,7 @@
 ﻿
 @{
   RootModule = 'pstools.daikin.psm1'
-  ModuleVersion = '1.10.1'
+  ModuleVersion = '1.10.2'
   CompatiblePSEditions = @('Desktop','Core')
   GUID = '5588fcbe-895e-4578-b1c3-9948bc62c746'
   Author = 'Hannes Palmquist'
