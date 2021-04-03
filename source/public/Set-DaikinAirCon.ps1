@@ -1,13 +1,15 @@
 ﻿<#PSScriptInfo
-    .VERSION 1.0.0.0
-    .GUID 6746c383-3590-4a42-b8e0-1a4134e6f216
-    .FILENAME Set-DaikinAirCon.ps1
-    .AUTHOR Hannes Palmquist
-    .AUTHOREMAIL hannes.palmquist@outlook.com
-    .CREATEDDATE 2020-10-03
-    .COMPANYNAME Personal
-    .COPYRIGHT (c) 2020, , All Rights Reserved
-#>
+{
+    "VERSION":  "1.0.0.0",
+    "GUID":  "6746c383-3590-4a42-b8e0-1a4134e6f216",
+    "FILENAME":  "Set-DaikinAirCon.ps1",
+    "AUTHOR":  "Hannes Palmquist",
+    "AUTHOREMAIL":  "hannes.palmquist@outlook.com",
+    "CREATEDDATE":  "2020-10-03",
+    "COMPANYNAME":  "Personal",
+    "COPYRIGHT":  "(c) 2020, , All Rights Reserved"
+}
+PSScriptInfo#>
 function Set-DaikinAirCon
 {
     <#
