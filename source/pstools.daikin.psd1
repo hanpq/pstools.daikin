@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
   RootModule = 'pstools.daikin.psm1'
   ModuleVersion = '1.10.2'
   CompatiblePSEditions = @('Desktop','Core')
@@ -46,7 +45,6 @@
   CLRVersion = ''
   ProcessorArchitecture = ''
 }
-
 
 
 
