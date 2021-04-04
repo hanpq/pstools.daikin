@@ -47,7 +47,7 @@ function Resolve-DaikinHostname
                 The operation is separated in a internal function to allow unit test mocks
 
             #>
-            return [System.Net.Dns]::GetHostEntry($hostname).AddressList[0].IPAddressToString
+            return [System.Net.Dns]::GetHostEntry($hostname).AddressList.Where( { $_.AddressFamily -eq 'InterNetwork' })[0].IPAddressToString
         }
     }
 
