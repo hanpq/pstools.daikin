@@ -8,7 +8,7 @@ Describe -Name 'Convert-DaikinResponse.ps1' -Fixture {
     }
     Context -Name 'When calling without raw' {        
         It -Name 'Should not throw' {
-            { Convert-DaikinResponse -String $ResponseString } | Should -Not -Throw
+            { Convert-DaikinResponse -String $ResponseString } | Should -Not -Throw 
         }
         It -Name 'Should return a ordered dictionary' {
             Convert-DaikinResponse -String $ResponseString | Should -BeOfType [System.Collections.Specialized.OrderedDictionary]
